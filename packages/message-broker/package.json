@@ -1,0 +1,13 @@
+{
+  "name": "@owe/message-broker",
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "module": "lib/index.mjs",
+  "files": ["lib"],
+  "dependencies": {
+    "@one/core": "^1.5.0",
+    "@owe/browser": "*",
+    "@owe/core": "*"
+  }
+}
