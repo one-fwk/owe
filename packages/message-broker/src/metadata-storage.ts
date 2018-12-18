@@ -7,7 +7,7 @@ export class MetadataStorage extends BaseMetadataStorage {
 
   public static findByAction(action: ActionType) {
     return [...this.observers.values()].filter(metadata =>
-      metadata.action.type === action.type,
+      metadata.action!.type === action.type,
     );
   }
 }

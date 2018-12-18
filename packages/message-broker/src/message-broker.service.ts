@@ -8,7 +8,7 @@ import { MessageBrokerException } from './message-broker.exception';
 
 @Injectable()
 export class MessageBrokerService implements OnModuleInit, OnAppInit {
-  private broker: BaseBrokerService;
+  private broker!: BaseBrokerService;
 
   constructor(
     @Inject(APP_CONTEXT)

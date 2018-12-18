@@ -129,7 +129,7 @@ function _extendableBuiltin(cls) {
 // contents of a function until the first time it's called, and since it will
 // never actually need to be called, this allows the polyfill to be included
 // in Firefox nearly for free.
-exports.polyfill = (namespace) => {
+export function polyfill(namespace) {
   // NOTE: apiMetadata is associated to the content of the api-metadata.json file
   // at build time by replacing the following "include" with the content of the
   // JSON file.
