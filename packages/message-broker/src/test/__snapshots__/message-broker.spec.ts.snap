@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageBroker should return response from content and popup 1`] = `
+Array [
+  "Hello from content",
+  "Hello from popup",
+]
+`;

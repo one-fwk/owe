@@ -2,6 +2,8 @@ import { Test, TestingModule } from '@one/testing';
 import { AppContext, ContextModule } from '@owe/core';
 import { browser } from '@owe/browser';
 import { Subject } from 'rxjs';
+import { toArray } from 'rxjs/operators';
+import { MessageBrokerException } from '../message-broker.exception';
 import {
   MessageBrokerModule,
   BackgroundBrokerService,
@@ -73,48 +75,39 @@ describe('MessageBroker', () => {
     (<any>browser.runtime).flush();
   });
 
-  /*it('should throw exception when dispatching to same context', () => {
-    const message = 'Cannot dispatch action to same context';
+  it('should throw exception when dispatching to same context', async () => {
+    const error = new MessageBrokerException('Cannot dispatch action to same context');
 
-    expect(() => background.dispatch(payload))
-      .toThrowWithMessage(MessageBrokerException, message);
-  });*/
-
-  it('should dispatch action to content and popup only', () => {
-    return broker.dispatch(payload).toPromise().then(() => {
-      expect(backgroundNextSpy).not.toHaveBeenCalled();
-      expect(contentNextSpy).toHaveBeenCalledWith(payload);
-      expect(popupNextSpy).toHaveBeenCalledWith(payload);
-    });
+    expect(() => background.dispatch(payload)).toThrowError(error);
   });
 
-  it('should return response from content and popup', (done) => {
+  it('should dispatch action to content and popup only', async () => {
+    await broker.dispatch(payload).toPromise();
+
+    expect(backgroundNextSpy).not.toHaveBeenCalled();
+    expect(contentNextSpy).toHaveBeenCalledWith(payload);
+    expect(popupNextSpy).toHaveBeenCalledWith(payload);
+  });
+
+  it('should return response from content and popup', async () => {
     const respondWith = ['Hello from content', 'Hello from popup'];
 
     content.observe(TestAction, () => respondWith[0]).subscribe();
     popup.observe(TestAction, () => respondWith[1]).subscribe();
 
-    // Write some helpers
-    //
-    // for this
-    let responses = [];
-    broker.dispatch(payload).subscribe({
-      next: (res) => responses.push(res),
-      complete() {
-        expect(responses).toHaveLength(2);
-        expect(responses).toIncludeSameMembers(respondWith);
-        done();
-      }
-    });
+    const responses = await broker.dispatch(payload).pipe(toArray()).toPromise();
+
+    expect(responses).toHaveLength(2);
+    expect(responses).toMatchObject(respondWith);
+    expect(responses).toMatchSnapshot();
   });
 
-  it('should dispatch action to specific context only', () => {
+  it('should dispatch action to specific context only', async () => {
     const dispatcher = background.dispatchTo(payload, AppContext.CONTENT);
+    await dispatcher.toPromise();
 
-    return dispatcher.toPromise().then(() => {
-      expect(contentNextSpy).toHaveBeenCalledWith(payload);
-      expect(backgroundNextSpy).not.toHaveBeenCalled();
-      expect(popupNextSpy).not.toHaveBeenCalled();
-    });
+    expect(contentNextSpy).toHaveBeenCalledWith(payload);
+    expect(backgroundNextSpy).not.toHaveBeenCalled();
+    expect(popupNextSpy).not.toHaveBeenCalled();
   });
 });
