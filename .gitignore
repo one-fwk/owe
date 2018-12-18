@@ -63,3 +63,4 @@ typings/
 # Builds
 .rpt2_cache/
 lib/
+.idea/

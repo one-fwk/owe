@@ -9,9 +9,9 @@ import { MetadataStorage } from '../metadata-storage';
 
 @Injectable()
 export abstract class BaseBrokerService {
-  protected readonly observers = new Set<[ActionType, Subject<any>, MessageResponse]>();
+  protected readonly observers = new Set<[ActionType, Subject<any>, MessageResponse | undefined]>();
   protected abstract readonly brokerType: AppContext;
-  private appContext: AppContext;
+  private appContext!: AppContext;
   private messageId = 0;
 
   constructor(private readonly container: OneContainer) {}
@@ -61,7 +61,7 @@ export abstract class BaseBrokerService {
         id,
       });
 
-      browser.runtime.sendMessage(message).then(responses => {
+      browser.runtime.sendMessage(message).then((responses: any[]) => {
         flatten(responses.filter(res => res)).forEach(
           res => res && observer.next(res),
         );
@@ -73,8 +73,8 @@ export abstract class BaseBrokerService {
 
   public init() {
     MetadataStorage.observers.forEach(({ action, target, propertyKey }) => {
-      const instance = this.container.getProvider(<Type<any>>target);
-      this.observe(action,(payload: any) => {
+      const instance = this.container.getProvider<any>(<Type<any>>target);
+      this.observe(action!,(payload: any) => {
         return instance[propertyKey](payload);
       }).subscribe();
     });

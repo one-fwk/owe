@@ -89,6 +89,7 @@ describe('MessageBroker', () => {
     expect(popupNextSpy).toHaveBeenCalledWith(payload);
   });
 
+  // Should the responses be an object/array where the key is the context?
   it('should return response from content and popup', async () => {
     const respondWith = ['Hello from content', 'Hello from popup'];
 
