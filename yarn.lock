@@ -591,10 +591,10 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@one/core@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@one/core/-/core-1.5.0.tgz#823a23fa0e13f92abcdace073f4a33d38658a497"
-  integrity sha512-DZwSJU2H/RQyhWFkK3BvcE2e5EE+Yih1qP7d2avYSg160Ur1tLCY1uloa2GRk7nEjaMoS3aWGKaiRV/UWMq/IQ==
+"@one/core@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@one/core/-/core-1.5.1.tgz#2c4780c31d73f36ee3c69badb65d39ea062c9da9"
+  integrity sha512-fojQqyYhnHkRlP8Q6egKDhxi6g2LLAzgG7dX8Wyp+VPAos1HL0zI2oDQXKY5YkS8SwpAryuKAwKrP1Et8KTrlQ==
   dependencies:
     fast-safe-stringify "^2.0.6"
     inversify "^4.13.0"

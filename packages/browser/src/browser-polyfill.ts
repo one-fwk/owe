@@ -1,7 +1,8 @@
 import { Browser } from 'webextension-polyfill-ts';
-import getBrowser from 'browser-detect';
+import detectBrowser from 'browser-detect';
 
 import { SupportedBrowsers } from './supported-browsers.enum';
+import { browser as browserMock } from './browser.mock';
 import { polyfill } from './polyfill';
 
 export function isNode() {
@@ -12,28 +13,32 @@ export function isNode() {
   );
 }
 
-export function getBrowserPolyfill(browserName?: SupportedBrowsers): Browser {
-  const fromBrowser = isNode ? SupportedBrowsers.NODE : getBrowser().name;
+export function getBrowserName(): string {
+  return isNode() ? SupportedBrowsers.NODE : detectBrowser().name as any;
+}
 
+export function getBrowserPolyfill(
+  browserName: string = getBrowserName(),
+): Browser {
   return (() => {
-    switch (browserName || SupportedBrowsers.NODE) {
+    switch (browserName) {
       case SupportedBrowsers.OPERA:
       case SupportedBrowsers.CHROME:
-        return polyfill(window['chrome']);
+        return polyfill((window as any)['chrome']);
 
       case SupportedBrowsers.EDGE:
-        return polyfill(window['browser']);
+        return polyfill((window as any)['browser']);
 
       case SupportedBrowsers.FIREFOX:
-        return window['browser'];
+        return (window as any)['browser'];
 
       case SupportedBrowsers.NODE:
         // External module that doesn't get included in the bundle
-        return require('./browser.mock').browser;
+        return browserMock;
 
       default:
         throw new Error(
-          `Browser ${fromBrowser} is currently not supported!
+          `Browser ${browserName} is currently not supported!
           Must be one of: ${Object.values(SupportedBrowsers).join(', ')}`
         );
     }

@@ -22,8 +22,6 @@ export function createBrokerTestingModule(context: AppContext) {
 }
 
 class TestAction {
-  static type = 'Whatever';
-
   constructor(readonly payload = 'lol') {}
 }
 
@@ -75,7 +73,7 @@ describe('MessageBroker', () => {
     (<any>browser.runtime).flush();
   });
 
-  it('should throw exception when dispatching to same context', async () => {
+  it('should throw exception when dispatching to same context', () => {
     const error = new MessageBrokerException('Cannot dispatch action to same context');
 
     expect(() => background.dispatch(payload)).toThrowError(error);

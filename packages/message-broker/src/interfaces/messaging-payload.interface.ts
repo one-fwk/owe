@@ -1,9 +1,9 @@
 import { AppContext } from '@owe/core';
 
-export interface MessagingPayload<T = any> {
+export interface MessagingPayload<T = object> {
   to?: AppContext;
   from: AppContext;
   payload: T;
-  type: string;
+  name: string;
   id: number;
 }

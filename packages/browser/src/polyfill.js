@@ -1,3 +1,4 @@
+// @ts-ignore-start
 var _typeof =
   typeof Symbol === "function" && typeof Symbol.iterator === "symbol"
     ? function(obj) {
@@ -1023,3 +1024,4 @@ export function polyfill(namespace) {
 
   return wrapObject(namespace, staticWrappers, apiMetadata);
 };
+// @ts-ignore-end

@@ -14,8 +14,9 @@ export default {
       format: 'cjs',
     },
     {
-      file: 'lib/index.mjs',
-      format: 'esm',
+      file: 'lib/index-es.js',
+      format: 'es',
+      exter
     },
   ]
 };

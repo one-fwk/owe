@@ -1,5 +1,6 @@
 import { Inject, Injectable, Injector, OnAppInit, OnModuleInit, Type } from '@one/core';
 import { APP_CONTEXT, AppContext } from '@owe/core';
+import { Observable } from 'rxjs';
 
 import { PopupBrokerService, BackgroundBrokerService, ContentBrokerService } from './services';
 import { BaseBrokerService } from './services/base-broker.service';
@@ -29,7 +30,7 @@ export class MessageBrokerService implements OnModuleInit, OnAppInit {
     }
   }
 
-  private isRegistered() {
+  private isRegistered(): boolean {
     if (!this.broker) {
       throw new MessageBrokerException('Not registered yet');
     }
@@ -41,14 +42,14 @@ export class MessageBrokerService implements OnModuleInit, OnAppInit {
    * Dispatch action to all contexts
    * @param payload
    */
-  public dispatch<T>(payload: object) {
+  public dispatch<T>(payload: object): Observable<T> {
     this.isRegistered();
     return this.broker.dispatchTo<T>(payload);
   }
 
-  public observe<T, R>(action: ActionType, respondWith?: MessageResponse) {
+  public observe<T, R>(action: ActionType, respondWith?: MessageResponse<R>) {
     this.isRegistered();
-    return this.broker.observe<T, R>(action, respondWith);
+    return this.broker.observe<T>(action, respondWith);
   }
 
   /**
