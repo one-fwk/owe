@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 
 import { PopupBrokerService, BackgroundBrokerService, ContentBrokerService } from './services';
 import { BaseBrokerService } from './services/base-broker.service';
-import { ActionType, MessageResponse } from './interfaces';
 import { MessageBrokerException } from './message-broker.exception';
+import { MessageResponse } from './interfaces';
 
 @Injectable()
 export class MessageBrokerService implements OnModuleInit, OnAppInit {
@@ -47,7 +47,7 @@ export class MessageBrokerService implements OnModuleInit, OnAppInit {
     return this.broker.dispatchTo<T>(payload);
   }
 
-  public observe<T, R>(action: ActionType, respondWith?: MessageResponse<R>) {
+  public observe<T, R>(action: Type<any>, respondWith?: MessageResponse<R>) {
     this.isRegistered();
     return this.broker.observe<T>(action, respondWith);
   }

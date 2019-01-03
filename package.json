@@ -4,7 +4,10 @@
   "version": "1.0.0",
   "description": "Modern framework built on top One to create cross-platform web extensions",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf packages/*/.rpt2_cache packages/*/lib",
+    "build": "rollup -c node:@zerollup/rollup-preset-ts",
+    "watch": "rollup -w -c node:@zerollup/rollup-preset-ts",
+    "publish": "yarn build && lerna publish --conventional-commits --yes"
   },
   "repository": {
     "type": "git",
@@ -21,11 +24,12 @@
     "@one/testing": "1.3.8",
     "@types/jest": "^23.3.10",
     "@types/node": "^10.12.15",
+    "@zerollup/rollup-preset-ts": "^1.6.5",
+    "@zerollup/ts-transform-paths": "^1.6.5",
     "jest": "^23.6.0",
     "jest-extended": "^0.11.0",
     "lerna": "^3.4.3",
     "reflect-metadata": "^0.1.12",
-    "rimraf": "^2.6.2",
     "rollup": "^0.68.0",
     "rollup-plugin-typescript2": "^0.18.1",
     "rxjs": "^6.3.3",

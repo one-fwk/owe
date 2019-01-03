@@ -3,12 +3,8 @@
   "version": "0.0.1",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "module": "lib/index-es.js",
+  "module": "lib/index.mjs",
   "files": ["lib"],
-  "scripts": {
-    "prepublish": "yarn build",
-    "build": "rimraf lib && rollup -c"
-  },
   "dependencies": {
     "@one/core": "^1.5.1"
   }

@@ -1,7 +1,7 @@
+import { Type } from '@one/core';
 import { MetadataStorage } from '../metadata-storage';
-import { ActionType } from '../interfaces';
 
-export function Observe(action: ActionType): MethodDecorator {
+export function Observe(action: Type<any>): MethodDecorator {
   return (target, propertyKey) => {
     MetadataStorage.observers.add({
       target: target.constructor,

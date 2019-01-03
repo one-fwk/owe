@@ -6,7 +6,11 @@
   "useWorkspaces": true,
   "npmClient": "yarn",
   "command": {
+    "init": {
+      "exact": true
+    },
     "publish": {
+      "message": "chore(release): %s [ci skip]",
       "ignoreChanges": ["**/*.spec.ts"]
     }
   }

@@ -10,7 +10,7 @@ import { MetadataStorage } from '../metadata-storage';
 
 @Injectable()
 export abstract class BaseBrokerService {
-  protected readonly observers = new Set<[Type<any>, Subject<unknown>, MessageResponse<unknown> | undefined]>();
+  protected readonly observers = new Set<[Type<any>, Subject<any>, MessageResponse<any> | undefined]>();
   protected abstract readonly brokerType: AppContext;
   private appContext!: AppContext;
   private messageId = 0;
@@ -21,7 +21,7 @@ export abstract class BaseBrokerService {
    * Dispatch action to specified context only
    * @param payload
    */
-  public dispatch(payload: object): Observable<unknown> {
+  public dispatch(payload: object): Observable<any> {
     if (this.brokerType === this.appContext) {
       throw new MessageBrokerException('Cannot dispatch action to same context');
     }
@@ -29,7 +29,7 @@ export abstract class BaseBrokerService {
     return this.dispatchTo(payload, this.brokerType);
   }
 
-  public observe<T>(action: Type<any>, response?: MessageResponse<unknown>): Subject<T> {
+  public observe<T>(action: Type<any>, response?: MessageResponse<any>): Subject<T> {
     const subject = new Subject<T>();
     this.observers.add([action, subject, response]);
     return subject;
@@ -51,7 +51,7 @@ export abstract class BaseBrokerService {
     };
   }
 
-  public dispatchTo<T>(payload: object, to?: AppContext): Observable<unknown> {
+  public dispatchTo<T>(payload: object, to?: AppContext): Observable<T> {
     return new Observable(observer => {
       const name = this.getActionName(payload);
       const id = this.messageId++;
@@ -65,7 +65,7 @@ export abstract class BaseBrokerService {
       browser.runtime.sendMessage(message).then((responses: any[]) => {
         flatten(responses.filter(res => !isUndef(res)))
           .filter(res => !isUndef(res))
-          .forEach(res => observer.next(res));
+          .forEach(res => observer.next(res as any));
 
         observer.complete();
       });
