@@ -6,7 +6,6 @@ import { Subject, Observable } from 'rxjs';
 
 import { MessageResponse, MessagingPayload } from '../interfaces';
 import { MessageBrokerException } from '../message-broker.exception';
-import { MetadataStorage } from '../metadata-storage';
 
 @Injectable()
 export abstract class BaseBrokerService {
@@ -72,13 +71,16 @@ export abstract class BaseBrokerService {
     });
   }
 
+  /**
+   * Refactor to use Container.getAllInjectables()
+   */
   public init() {
-    MetadataStorage.observers.forEach(({ action, target, propertyKey }) => {
+    /*MetadataStorage.observers.forEach(({ action, target, propertyKey }) => {
       const instance = this.container.getProvider<any>(<Type<unknown>>target);
       this.observe(action!,(payload: unknown) => {
         return instance[propertyKey](payload);
       }).subscribe();
-    });
+    });*/
   }
 
   private isInvalidMessage(message: MessagingPayload): boolean {

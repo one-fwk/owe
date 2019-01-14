@@ -14,7 +14,7 @@ export function isNode() {
 }
 
 export function getBrowserName(): string {
-  return isNode() ? SupportedBrowsers.NODE : detectBrowser().name as any;
+  return isNode() ? SupportedBrowsers.NODE : detectBrowser().name as string;
 }
 
 export function getBrowserPolyfill(
@@ -33,7 +33,6 @@ export function getBrowserPolyfill(
         return (window as any)['browser'];
 
       case SupportedBrowsers.NODE:
-        // External module that doesn't get included in the bundle
         return browserMock;
 
       default:

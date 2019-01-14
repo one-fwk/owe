@@ -1,8 +1,8 @@
 {
-  "name": "owe",
+  "name": "owejs",
   "private": true,
   "version": "1.0.0",
-  "description": "Modern framework built on top One to create cross-platform web extensions",
+  "description": "Modern framework built on top One to create cross-browser web extensions",
   "scripts": {
     "clean": "rm -rf packages/*/.rpt2_cache packages/*/lib",
     "build": "rollup -c node:@zerollup/rollup-preset-ts",

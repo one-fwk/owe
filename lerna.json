@@ -10,6 +10,7 @@
       "exact": true
     },
     "publish": {
+      "npmClient": "yarn",
       "message": "chore(release): %s [ci skip]",
       "ignoreChanges": ["**/*.spec.ts"]
     }
