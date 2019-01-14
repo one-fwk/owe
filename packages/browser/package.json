@@ -1,10 +1,12 @@
 {
   "name": "@owejs/browser",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "module": "lib/index.mjs",
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "browser-detect": "^0.2.28",
     "webextension-polyfill-ts": "^0.8.9"

@@ -2,7 +2,7 @@
   "packages": [
     "packages/*"
   ],
-  "version": "0.0.0",
+  "version": "0.1.0",
   "useWorkspaces": true,
   "npmClient": "yarn",
   "command": {
@@ -12,7 +12,9 @@
     "publish": {
       "npmClient": "yarn",
       "message": "chore(release): %s [ci skip]",
-      "ignoreChanges": ["**/*.spec.ts"]
+      "ignoreChanges": [
+        "**/*.spec.ts"
+      ]
     }
   }
 }

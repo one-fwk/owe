@@ -1,10 +1,12 @@
 {
   "name": "@owejs/message-broker",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "module": "lib/index.mjs",
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "peerDependencies": {
     "rxjs": "^6.3.3"
   },
