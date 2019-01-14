@@ -7,8 +7,12 @@
   "files": [
     "lib"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "browser-detect": "^0.2.28",
     "webextension-polyfill-ts": "^0.8.9"
-  }
+  },
+  "gitHead": "b3f86e94addcc8c2c3ad8a22629850ca97e7ca67"
 }

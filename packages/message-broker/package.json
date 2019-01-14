@@ -7,6 +7,9 @@
   "files": [
     "lib"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "rxjs": "^6.3.3"
   },
@@ -14,5 +17,6 @@
     "@one/core": "^1.5.1",
     "@owe/browser": "*",
     "@owe/core": "*"
-  }
+  },
+  "gitHead": "b3f86e94addcc8c2c3ad8a22629850ca97e7ca67"
 }
